@@ -92,7 +92,7 @@ function app(messageDelay) {
 
     signOut() {
       userbase.signOut().then(user => {
-        this.msg("Signed out")
+        // this.msg("Signed out")
         this.loggedIn = false;
       });
     }
