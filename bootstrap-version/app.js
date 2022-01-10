@@ -22,6 +22,8 @@ function app(messageDelay) {
     isError: isError,
     loading: loading,
 
+    items: [],
+
     msg(msg) {
       this.message = msg
       setTimeout(() => {
@@ -82,6 +84,19 @@ function app(messageDelay) {
           this.loggedIn = true;
           this.isError = false;
           this.loading = false;
+
+          userbase.openDatabase({
+            databaseName: 'app',
+            changeHandler: function(items) {
+              // update your application state with the database items
+              this.items = items;
+            }
+          }).then(() => {
+            // the database can now be used
+
+          }).catch((e) => console.error(e))
+
+
         })
         .catch(err => {
           this.msg("Error: username or password incorrect")
